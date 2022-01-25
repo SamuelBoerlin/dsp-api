@@ -10,6 +10,14 @@ ifeq ($(BUILD_TAG),)
   BUILD_TAG := $(shell git rev-parse --verify HEAD)
 endif
 
+# When running a rebuild +run_id is appended to the tag
+# to set it apart from the original release
+ifeq ($(GITHUB_EVENT_NAME),workflow_dispatch)
+	BUILD_TAG := $(BUILD_TAG)+$(GITHUB_RUN_ID)
+endif
+
+$(info Build tag: $(BUILD_TAG))
+
 ifeq ($(GIT_EMAIL),)
   GIT_EMAIL := $(shell git config user.email)
 endif
