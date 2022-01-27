@@ -13,7 +13,7 @@ endif
 # When running a rebuild +run_id is appended to the tag
 # to set it apart from the original release
 ifeq ($(GITHUB_EVENT_NAME),workflow_dispatch)
-	BUILD_TAG := $(BUILD_TAG)+$(GITHUB_RUN_ID)
+	BUILD_TAG := $(BUILD_TAG)+$(GITHUB_RUN_NUMBER)
 endif
 
 $(info Build tag: $(BUILD_TAG))
